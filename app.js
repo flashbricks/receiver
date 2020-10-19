@@ -13,14 +13,19 @@ const PORT = 3000;
 var robot = require("robotjs");
 
 app.post('/', (req, res) => {
-    console.log(req.body);
+    if(typeof req.body.sku == "string" && typeof req.body.size == "string") {
+        robot.typeString("asd");
+        robot.typeString(req.body.sku);
+        robot.typeString("f");
+        robot.typeString("asq");
+        robot.typeString(req.body.size);
+        robot.typeString("f");
+        robot.typeString("w");
 
-    robot.keyToggle("alt", "down")
-    robot.keyToggle("tab", "down")
-    robot.keyToggle("tab", "up")
-    robot.keyToggle("alt", "up")
-
-    res.status(200).json({ message: `Success` })
+        res.status(200).json({ message: `Task Started` })
+    } else {
+        res.status(400).json( {message: `Incorrect Params`} )
+    }
 });
 
 app.listen(PORT, () => {
