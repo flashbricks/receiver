@@ -1,16 +1,4 @@
-    inetmgr
+# Flash Bricks Dashboard Receiver
+Script that automatically starts BNB tasks upon request from the Flash Bricks Dashboard.
 
-https://www.iis.net/downloads/microsoft/url-rewrite
-
-https://www.iis.net/downloads/microsoft/application-request-routing
-
-https://nodejs.org/en/
-
-    cd Desktop\receiver-master
-    
-    npm install --global --production windows-build-tools
-    
-    npm install
-  
-    node app
-  
+View releases [here](https://github.com/flashbricks/receiver/releases)
