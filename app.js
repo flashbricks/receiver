@@ -9,11 +9,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.set("json spaces", 4);
 
 const PORT = 3000;
+const TASK_TIMEOUT = 30000;
 
 var robot = require("robotjs");
+var running = false;
 
 app.post("/", (req, res) => {
-    if(typeof req.body.sku == "string" && typeof req.body.size == "string") {
+    if(typeof req.body.sku == "string" && typeof req.body.size == "string" && !running) {
         robot.typeString("asd");
         robot.typeString(req.body.sku);
         robot.typeString("f");
@@ -22,9 +24,15 @@ app.post("/", (req, res) => {
         robot.typeString("f");
         robot.typeString("w");
 
-        res.status(200).json({ message: `Task Started` })
+        running = true;
+        setTimeout(function() {
+            robot.typeString("e");
+            running = false;
+        }, TASK_TIMEOUT);
+
+        res.status(200).json({ message: `Task Started` });
     } else {
-        res.status(400).json( {message: `Incorrect Params`} )
+        res.status(400).json({ message: `Incorrect Params Or Bot Busy`});
     }
 });
 
@@ -33,5 +41,5 @@ app.post("/test", (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`App Listening On Port ${PORT}`);
+    console.log(`Server Listening On Port ${PORT}`);
 });
